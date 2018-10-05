@@ -1,0 +1,39 @@
+<div class="jumbotron" style="background-color:rgb(128, 128, 128,.7); margin-left:1%;">
+	<button class="btn btn-primary" (click)="returnGame()">Return Game</button>
+	<div class="container">
+		<div class="row">
+			<div *ngFor="let item of items">
+				<div class="col-lg-5 col-md-6">
+					<div class="jumbotron">
+						<div class="row">
+							<div class="col-lg-6">
+								<img src='{{item.pic}}' />
+							</div>
+							<div class="col-lg-6">
+								<h3>{{item.name}}      ${{item.coin}}</h3>
+								<p style="font-size:medium; font-style:italic">{{item.description}}</p>
+							</div>
+						</div>
+						<div class="row col-md-offset-9">
+							<button class="btn btn-primary" (click)="submitOrder(item.name)" data-toggle="modal" data-target="#confirmModal">Buy</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div #confirmModal class="modal fade" id="confirmModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Order Confirmation</h4>
+				</div>
+				<div class="modal-body">
+					<p>{{message}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

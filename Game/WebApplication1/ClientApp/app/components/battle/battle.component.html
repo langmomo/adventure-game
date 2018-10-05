@@ -1,0 +1,19 @@
+<h2 *ngIf="!winner && !draw" class="current-player">It¡¯s <span [innerHTML]="	"></span> turn! <span class="title-block"></span></h2>
+<h2 *ngIf="winner" class="winner-player">Congratulations, <span [innerHTML]="winner.winner"></span> wins!<span class="title-block"></span></h2>
+<h2 *ngIf="draw" class="draw">DRAW!! <span class="title-block"></span></h2>
+
+<div class="tc-battlefield">
+	<button class="square top left" (click)="play(0, 0, currentPlayer)">{{currentPlayerLabel}}</button>
+	<button class="square top" (click)="play(0, 1, currentPlayer)" tc-set-value>{{currentPlayerLabel}}</button>
+	<button class="square top right" (click)="play(0, 2, currentPlayer)" tc-set-value>{{currentPlayerLabel}}</button>
+	<div class="square left" (click)="play(1, 0, currentPlayer)" tc-set-value></div>
+	<div class="square" (click)="play(1, 1, currentPlayer)" tc-set-value ></div>
+	<div class="square right" (click)="play(1, 2, currentPlayer)" tc-set-value ></div>
+	<div class="square bottom left" (click)="play(2, 0, currentPlayer)" tc-set-value></div>
+	<div class="square bottom" (click)="play(2, 1, currentPlayer)" tc-set-value ></div>
+	<div class="square bottom right" (click)="play(2, 2, currentPlayer)" tc-set-value ></div>
+	<div class="tc-lock-field" *ngIf="winner || draw"></div>
+</div>
+
+<button class="btn-play-again" tc-restart-game *ngIf="winner || draw" (click)="startGame()">PLAY AGAIN</button>
+

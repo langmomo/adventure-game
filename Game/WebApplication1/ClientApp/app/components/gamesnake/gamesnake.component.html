@@ -1,0 +1,66 @@
+<p>
+	Use the arrow keys on your keyboard to control the snake
+</p>
+<h3>Score:{{score}}    Timer:{{count}}</h3>
+<button class="btn btn-primary" (click)="toggle()">Start Game</button>
+<div class="row" style="margin-left:30%" *ngFor="let column of board; let y=index">
+	<div class="column"
+		 *ngFor="let row of column; let x=index; trackBy:x"
+		 [style.background-color]="getStyling()">
+		<div *ngIf="getFruit(y, x)">
+			<label style="color:rgb(255, 216, 0)">C</label>
+		</div>
+		<div *ngIf="getSnake(y, x)">
+			<label style="color:red">S</label>
+		</div>
+	</div>
+</div>
+<!--<div class="backdrop" [ngStyle]="{'display':display}"></div>-->
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+
+
+	<div class="modal-dialog" role="document">
+
+
+		<div class="modal-content">
+
+
+			<div class="modal-header">
+
+
+				<!--<button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>-->
+
+
+				<h4 class="modal-title">Message</h4>
+
+
+			</div>
+
+
+			<div class="modal-body">
+
+
+				<p>Please click close button</p>
+
+
+			</div>
+
+
+			<div class="modal-footer">
+
+
+				<button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+
+
+			</div>
+
+
+		</div><!-- /.modal-content -->
+
+
+	</div><!-- /.modal-dialog -->
+
+
+</div><!-- /.modal !-->

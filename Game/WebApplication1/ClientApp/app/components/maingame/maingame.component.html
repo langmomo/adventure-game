@@ -1,0 +1,110 @@
+
+<div class="jumbotron" style="background-color:rgb(128, 128, 128,.7); margin-left:20%">
+	<div class="col-md-2">
+		<button (click)="restart()" class="btn btn-primary">Restart</button>
+		<h3 style="color:black">Time: {{time}}</h3>
+		<h3 style="color:black"> Coin: {{coin}}</h3>
+		<button class="btn btn-primary" (click)="getGame()" data-toggle="modal" data-target="#myModal">Game</button>
+	</div>
+	
+	<div class="container" style="margin-left:25%">
+		<div class="row" *ngFor="let column of board; let y=index">
+			<div class="column"
+				 *ngFor="let row of column; let x=index; trackBy:x">
+				<div *ngIf="getMap(y, x) && !getStatue(y,x)">
+					<button [style.background-color]="getStyling(y, x)" (click)="setStyling(y,x)" disabled>{{game[y][x]}}</button>
+
+				</div>
+				<div *ngIf="getMap(y, x) && getStatue(y,x)">
+					<button style="background-color:red" disabled>{{game[y][x]}}</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div #template class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+					<h4 class="modal-title">Message</h4>
+				</div>
+				<div class="modal-body">
+					<ng-container *ngIf="needSleep && !display && scene=='trap'; then loggedIn; else loggedOut">
+					</ng-container>
+
+					<ng-template #loggedIn>
+						<p>{{count}}</p>
+					</ng-template>
+					<ng-template #loggedOut>
+						<p>{{story}}</p>
+					</ng-template>
+					<!--<div *ngIf="needSleep && display && scene=='trap' ">
+						<p>{{count}}</p>
+					</div>
+					<p>{{story}}</p>-->
+				</div>
+				<div class="modal-footer">
+					
+						<div *ngIf="display">
+							<button class="btn btn-primary" #btn type="button" class="btn btn-default" data-dismiss="modal" (click)="redirectToGame()">Confirm</button>
+						</div>
+						<div *ngIf="isTool()">
+
+							<button class="btn btn-primary" data-toggle="modal" data-target="#toolModal" data-dismiss="modal">Tool</button>
+						</div>
+						<div *ngIf="getEnd()">
+							<button class="btn btn-primary" data-toggle="modal" data-target="#scoreModal" data-dismiss="modal">Score</button>
+						</div>
+					
+					
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!--<button (click)="direct()"></button>-->
+
+	<div #tool class="modal fade" id="toolModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Card Center</h4>
+				</div>
+				<div class="modal-body">
+					<div *ngFor="let t of tools">
+						<button (click)="submitTool(t)" data-dismiss="modal">{{t}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div #score class="modal fade" id="scoreModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Final Score</h4>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<h3>Name: {{cusName}}</h3>
+						<h3>Rank:{{rank}}</h3>
+						<p>Time:{{time}}  Coin:{{coin}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
